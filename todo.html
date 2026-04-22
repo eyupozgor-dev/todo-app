@@ -132,6 +132,22 @@
       color: #aaa;
     }
 
+    .done-icon {
+      display: none;
+      font-size: 1.1rem;
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      flex-shrink: 0;
+    }
+
+    .todo-item.done .done-icon {
+      display: inline;
+    }
+
+    @keyframes popIn {
+      0%   { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
     .todo-item .edit-btn,
     .todo-item .delete-btn {
       background: none;
@@ -278,6 +294,10 @@
             render();
           });
 
+          const doneIcon = document.createElement('span');
+          doneIcon.className = 'done-icon';
+          doneIcon.textContent = '🌟';
+
           const span = document.createElement('span');
           span.className = 'text';
           span.textContent = todo.text;
@@ -333,6 +353,7 @@
 
           li.appendChild(cb);
           li.appendChild(span);
+          li.appendChild(doneIcon);
           li.appendChild(editInput);
           li.appendChild(edit);
           li.appendChild(del);
